@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.card {
+    background: rgba(255,255,255,0.08);
+    padding: 40px;
+    border-radius: 20px;
+    width: 350px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.subtitle {
+    opacity: 0.7;
+    margin-bottom: 20px;
+}
+
+/* 🔥 MAIN FIX */
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 🔥 FORCE EVERYTHING SAME WIDTH */
+.form input,
+.form select,
+.form button {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 🔥 INPUT + SELECT STYLE */
+.form input,
+.form select {
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+/* 🔥 FIX SELECT WEIRDNESS */
+.form select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* BUTTON */
+button {
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #00c9a7;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* RESULT */
+.result-card {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 10px;
+    text-align: left;
+}
+
+.hidden {
+    display: none;
+}
+
+/* POPUP */
+.popup {
+    position: fixed;
+    right: 20px;
+    background: #ff4d4d;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+    animation: slideIn 0.4s ease;
+}
+
+/* 🔥 SLIDE ANIMATION */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* DROPDOWN TEXT */
+select option {
+    color: black;
+}
+
+/* 🔥 PAGE FADE OUT */
+.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}

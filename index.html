@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Travel Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+    <h1>Smart Travel Planner</h1>
+    <p class="subtitle">Plan smarter. Travel better.</p>
+
+    <div class="form">
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="number" id="budget" placeholder="Budget (Rs)">
+        <input type="number" id="days" placeholder="Number of Days">
+        <input type="text" id="destination" placeholder="Destination">
+
+        <!-- Same as C++ choice -->
+        <select id="preference">
+            <option value="1">Budget Friendly</option>
+            <option value="2">Balanced</option>
+            <option value="3">Luxury</option>
+        </select>
+
+        <button onclick="planTrip()">Generate Plan</button>
+    </div>
+
+    <div id="result" class="result-card hidden"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
