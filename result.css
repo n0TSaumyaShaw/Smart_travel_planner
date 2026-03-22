@@ -77,3 +77,14 @@ body {
         transform: scale(1);
     }
 }
+
+.fallback {
+    background: rgba(255, 193, 7, 0.15);
+    color: #ffd54f;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}

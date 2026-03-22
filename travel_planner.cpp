@@ -130,7 +130,7 @@ int main() {
 
     // ---------------- LOGIC ----------------
 
-    Transport* transports[3] = { &flight, &train, &bus };
+    Transport* transports[3] = { &bus, &train, &flight };
     Hotel hotels[3] = { budgetHotel, standardHotel, luxuryHotel };
 
     for (int i = 0; i < 3; i++) {

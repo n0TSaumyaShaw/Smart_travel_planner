@@ -20,7 +20,18 @@
 <script>
 let data = JSON.parse(localStorage.getItem("result"));
 
+let fallbackMessage = "";
+
+if (data.fallback) {
+    fallbackMessage = `
+        <div class="fallback">
+            ⚠️ Preference not available — showing best plan within your budget
+        </div>
+    `;
+}
+
 document.getElementById("resultBox").innerHTML = `
+    ${fallbackMessage}
     <div class="row">👤 <span>${data.name}</span></div>
     <div class="row">📍 <span>${data.destination}</span></div>
     <div class="row">🚍 <span>${data.transport}</span></div>

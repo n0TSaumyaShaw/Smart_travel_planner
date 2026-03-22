@@ -6,17 +6,14 @@ function showError(message, delay = 0) {
         popup.className = "popup";
         popup.innerText = message;
 
-        // 🔥 STACKING POSITION
         popup.style.top = (20 + popupCount * 60) + "px";
         popupCount++;
 
         document.body.appendChild(popup);
 
-        // 🔊 SOUND
         let sound = new Audio("error.mp3");
         sound.play().catch(() => {});
 
-        // REMOVE + SHIFT UP
         setTimeout(() => {
             popup.remove();
             popupCount--;
@@ -24,6 +21,7 @@ function showError(message, delay = 0) {
 
     }, delay);
 }
+
 function planTrip() {
     let name = document.getElementById("name").value.trim();
     let budget = parseFloat(document.getElementById("budget").value);
@@ -57,6 +55,7 @@ function planTrip() {
 
     let validPlans = [];
 
+    // 🌟 Generate all valid plans within budget
     for (let t of transports) {
         for (let h of hotels) {
             let total = t.cost + (h.cost * days);
@@ -76,6 +75,7 @@ function planTrip() {
         return;
     }
 
+    // 🎯 Apply preference filter
     let filteredPlans = [];
 
     if (choice == "3") {
@@ -92,38 +92,36 @@ function planTrip() {
         filteredPlans = validPlans;
     }
 
+    // 🌙 Fallback logic
+    let finalPlans = [];
+    let usedFallback = false;
+
     if (filteredPlans.length === 0) {
-        showError("No plan matches your selected preference.");
-        return;
+        showError("Preference not possible... showing best available.");
+        finalPlans = validPlans;
+        usedFallback = true;
+    } else {
+        finalPlans = filteredPlans;
     }
 
-    filteredPlans.sort((a, b) => a.cost - b.cost);
-    let best = filteredPlans[0];
+    // 🏆 Pick best plan
+    finalPlans.sort((a, b) => a.cost - b.cost);
+    let best = finalPlans[0];
 
-    // 🔥 THIS WAS MISSING (MAIN FEATURE)
+    // 💾 Save result (WITH fallback flag)
     localStorage.setItem("result", JSON.stringify({
         name: name,
         destination: destination,
         transport: best.transport,
         hotel: best.hotel,
-        cost: best.cost
+        cost: best.cost,
+        fallback: usedFallback
     }));
 
-    // 🔥 REDIRECT TO NEW PAGE
-    // 🔥 SAVE DATA
-localStorage.setItem("result", JSON.stringify({
-    name: name,
-    destination: destination,
-    transport: best.transport,
-    hotel: best.hotel,
-    cost: best.cost
-}));
+    // 🎬 Smooth transition
+    document.body.classList.add("fade-out");
 
-// 🔥 ADD SMOOTH TRANSITION
-document.body.classList.add("fade-out");
-
-// WAIT THEN REDIRECT
-setTimeout(() => {
-    window.location.href = "result.html";
-}, 500);
+    setTimeout(() => {
+        window.location.href = "result.html";
+    }, 500);
 }
