@@ -97,12 +97,12 @@ function planTrip() {
     let usedFallback = false;
 
     if (filteredPlans.length === 0) {
-        showError("Preference not possible... showing best available.");
-        finalPlans = validPlans;
-        usedFallback = true;
+    // 🌙 Silent fallback (no popup)
+    finalPlans = validPlans;
+    usedFallback = true;
     } else {
-        finalPlans = filteredPlans;
-    }
+    finalPlans = filteredPlans;
+}
 
     // 🏆 Pick best plan
     finalPlans.sort((a, b) => a.cost - b.cost);
