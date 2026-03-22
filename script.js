@@ -55,7 +55,7 @@ function planTrip() {
 
     let validPlans = [];
 
-    // 🌟 Generate all valid plans within budget
+    // 🌟 Generate all valid plans
     for (let t of transports) {
         for (let h of hotels) {
             let total = t.cost + (h.cost * days);
@@ -75,7 +75,7 @@ function planTrip() {
         return;
     }
 
-    // 🎯 Apply preference filter
+    // 🎯 Preference filter
     let filteredPlans = [];
 
     if (choice == "3") {
@@ -92,33 +92,59 @@ function planTrip() {
         filteredPlans = validPlans;
     }
 
-    // 🌙 Fallback logic
+    // 🌙 Fallback
     let finalPlans = [];
     let usedFallback = false;
 
     if (filteredPlans.length === 0) {
-    // 🌙 Silent fallback (no popup)
-    finalPlans = validPlans;
-    usedFallback = true;
+        finalPlans = validPlans;
+        usedFallback = true;
     } else {
-    finalPlans = filteredPlans;
-}
+        finalPlans = filteredPlans;
+    }
 
-    // 🏆 Pick best plan
+    // 🏆 Best plan
     finalPlans.sort((a, b) => a.cost - b.cost);
     let best = finalPlans[0];
 
-    // 💾 Save result (WITH fallback flag)
+    // 💡 Insight calculation
+    let extraNeeded = 0;
+
+    if (usedFallback) {
+        let targetTransport, targetHotel;
+
+        if (choice == "3") {
+            targetTransport = "Flight";
+            targetHotel = "Luxury";
+        } else if (choice == "2") {
+            targetTransport = "Train";
+            targetHotel = "Standard";
+        }
+
+        if (targetTransport && targetHotel) {
+            let transportCost = transports.find(t => t.type === targetTransport).cost;
+            let hotelCost = hotels.find(h => h.type === targetHotel).cost;
+
+            let requiredCost = transportCost + (hotelCost * days);
+
+            if (requiredCost > budget) {
+                extraNeeded = requiredCost - budget;
+            }
+        }
+    }
+
+    // 💾 Save everything
     localStorage.setItem("result", JSON.stringify({
         name: name,
         destination: destination,
         transport: best.transport,
         hotel: best.hotel,
         cost: best.cost,
-        fallback: usedFallback
+        fallback: usedFallback,
+        extraNeeded: extraNeeded
     }));
 
-    // 🎬 Smooth transition
+    // 🎬 Transition
     document.body.classList.add("fade-out");
 
     setTimeout(() => {

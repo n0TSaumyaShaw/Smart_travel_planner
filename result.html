@@ -21,7 +21,9 @@
 let data = JSON.parse(localStorage.getItem("result"));
 
 let fallbackMessage = "";
+let insightMessage = "";
 
+// ⚠️ fallback message
 if (data.fallback) {
     fallbackMessage = `
         <div class="fallback">
@@ -30,8 +32,19 @@ if (data.fallback) {
     `;
 }
 
+// 💡 insight message
+if (data.fallback && data.extraNeeded > 0) {
+    insightMessage = `
+        <div class="insight">
+            💡 You needed ₹${data.extraNeeded} more for your preferred plan
+        </div>
+    `;
+}
+
 document.getElementById("resultBox").innerHTML = `
     ${fallbackMessage}
+    ${insightMessage}
+
     <div class="row">👤 <span>${data.name}</span></div>
     <div class="row">📍 <span>${data.destination}</span></div>
     <div class="row">🚍 <span>${data.transport}</span></div>
